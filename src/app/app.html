@@ -1,0 +1,94 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar class="header-search">
+    	<ion-row>
+	    	<ion-col width-80>
+	    		<div class="search-input">
+		    		<ion-icon name="search"></ion-icon>
+				    <ion-input
+				    	[value]="searchCtrl.searchString"
+				    	(input)="searchCtrl.onInput($event.target.value)"
+				    	type="text"
+				    	placeholder="Enter Your Location">
+				    </ion-input>
+				    </div>
+		    </ion-col>
+		    <ion-col width-20>
+				  <button ion-button small clear class="button-action">
+				  	<span
+					  	*ngIf="searchCtrl.isActive"
+					  	(click)="searchCtrl.onCancel()">
+				    	Cancel
+				    </span>
+				    <span
+					  	*ngIf="!searchCtrl.isActive && !editCtrl.isActive"
+							(click)="editCtrl.setMode(true)">
+							Edit
+						</span>
+						<span
+							*ngIf="!searchCtrl.isActive && editCtrl.isActive"
+							(click)="editCtrl.setMode(false)">
+							Done
+						</span>
+				  </button>
+			  </ion-col>
+		  </ion-row>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+  	<!-- search results -->
+  	<ion-list
+  		*ngIf="searchCtrl.isActive"
+  		class="search-results">
+      <button
+      		ion-item
+			class="weather-nav-item"
+  			*ngFor="let opts of searchCtrl.results"
+  			(click)="openForcase(opts)">
+        {{opts.title}}
+      </button>
+  	</ion-list>
+
+  	<!-- list of areas -->
+	<button
+		ion-item
+		class="weather-nav-item"
+	  	(click)="openForcase('currentLocation')">
+		Current Location
+	</button>
+    <ion-list
+    	[reorder]="editCtrl.isActive"
+    	(ionItemReorder)="onReorderArea($event)"
+    	delete="editCtrl.isActive">
+		<ion-item-sliding
+			#slidingItem
+			class="weather-nav-item"
+			(Class)="{ 'canEdit': editCtrl.isActive }"
+			*ngFor="let opts of areas">
+			<ion-item
+				[attr.detail-push]="!editCtrl.isActive || null"
+				(click)="editCtrl.isActive ? close(slidingItem) : openForcase(opts)">
+				<ion-icon
+					item-left
+					(click)="open(slidingItem)"
+					*ngIf="editCtrl.isActive"
+					color="danger"
+					name="remove-circle">
+				</ion-icon>
+				{{opts.title}}
+			</ion-item>
+			<ion-item-options side="right">
+				<button ion-button (click)="remove(opts)">Remove</button>
+			</ion-item-options>
+		</ion-item-sliding>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<!-- Add gestures to go between locations -->
+
+<ion-nav
+	[root]="rootPage"
+	#content
+	swipeBackEnabled="false">
+</ion-nav>

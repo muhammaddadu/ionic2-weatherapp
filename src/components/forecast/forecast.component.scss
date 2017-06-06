@@ -1,0 +1,33 @@
+forecast-component {
+	background-color: color($colors, primary);
+
+	.background-image {
+		width: 100vw; height: 100vh;
+		background-size: cover;
+		background-position: center center;
+		opacity: 0.2;
+	}
+
+	.toolbar-background,
+	.content {
+		background: transparent;
+	}
+
+	.bar-button-default {
+		color: white;
+	}
+
+	.last-updated {
+		.icon,
+		.spinner {
+			margin: 0 1vw 0 0;
+			color: black;
+			font-size: 2em;
+			vertical-align: middle;
+			height: 6vh;
+		}
+		.spinner {
+			width: 4vh;
+		}
+	}
+}

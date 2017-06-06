@@ -1,0 +1,44 @@
+/**
+ * Header
+ */
+.header-search {
+	.toolbar-background {
+		background-color: color($colors, primary);
+	}
+
+	.search-input {
+		background-color: white;
+		padding: 1vh;
+
+		.input {
+			background-color: transparent;
+			border: none;
+
+			position: relative;
+			float: right;
+			width: 30vh;
+			height: 4vh;
+			margin-top: -1.6vh;
+			padding-left: 2vw;
+		}
+	}
+
+	.button-action {
+		width: 100%;
+		text-align: center;
+		color: white;
+		margin-left: -1vw;
+	}
+}
+
+/**
+ * Nav Items
+ */
+.weather-nav-item {
+	background-color: transparent;
+}
+
+.search-results {
+	background-color: color($colors, light);
+	height: 100%;
+}

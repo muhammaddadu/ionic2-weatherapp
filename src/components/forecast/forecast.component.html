@@ -1,0 +1,34 @@
+<div class="background-image" style="background-image: url('//c8.staticflickr.com/7/6200/6155018335_327602b79d_b.jpg')"></div>
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Weather App</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<span class="last-updated">
+		<ion-icon *ngIf="!isLoading" name="refresh" (tap)="loadData()"></ion-icon>
+		<ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+		<span *ngIf="!isLoading">Last Updated @ {{data.channel.lastBuildDate | date:'shortTime'}}</span>
+		<span *ngIf="isLoading">Fetching new data...</span>
+	</span>
+	<span *ngIf="data && data.channel">
+	  <h1 *ngIf="data.channel.location">
+	  	{{data.channel.location.city}}
+	  </h1>
+	  <h5>Today</h5>
+	  <span>{{data.channel.units | json}}</span>
+	  <pre>{{data.channel.item.condition | json}}</pre>
+	  <h6>Wind</h6>
+	  <pre>{{data.channel.wind | json}}</pre>
+	  <h6>Atmosphere</h6>
+	  <pre>{{data.channel.atmosphere | json}}</pre>
+	  <h6>Astronomy</h6>
+	  <pre>{{data.channel.astronomy | json}}</pre>
+	  <h6>Forecast</h6>
+	  <pre>{{data.channel.item.forecast | json}}</pre>
+  </span>
+</ion-content>
